@@ -210,7 +210,7 @@ void Menu() {
 	Map();
 	int x = 25, y = 8;
 	gotoxy(24, 6); printf("Snake Game");
-	gotoxy(24, 8); printf("  Ω√¿€");
+	gotoxy(24, 8); printf("  Start");
 	gotoxy(24, 9); printf("  Snake");
 	gotoxy(24, 10); printf("  Map");
 	gotoxy(24, 11); printf("  Food");
