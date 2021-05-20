@@ -119,6 +119,7 @@ void Move(int dir) {
 	}
 	if (x[0] == 0 || y[0] == 0 || x[0] == 58 || y[0] == 19) {		// 벽
 		GameOver(); return 0;
+
 	}
 	for (int i = 1; i < length; i++) {								// 꼬리
 		if (x[0] == x[i] && y[0] == y[i]) {
@@ -164,7 +165,17 @@ void GameOver() {
 	gotoxy(25, 9);
 	printf("Game Over");
 	gotoxy(25, 10);
-	printf("점수 : %d", score);
+	printf("점수 : %d", score);//죽으면 점수출력
+	gotoxy(25, 11);
+	printf("Exit : 'A'");
+	while (1)// A누르면 게임재시작 break
+	{
+		if (_getch() == 'a' || _getch() == 'A')
+		{
+			playSnakeGame();
+			break;
+		}
+	}
 }
 
 void DropFood() {
