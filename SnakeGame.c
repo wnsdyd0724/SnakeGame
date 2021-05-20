@@ -210,14 +210,14 @@ void Menu() {
 	setcursortype(NOCURSOR);
 	Map();
 	int x = 25, y = 8;
-	gotoxy(24, 6); printf("Snake Game");
-	gotoxy(24, 8); printf("  Start");
-	gotoxy(24, 9); printf("  Snake");
-	gotoxy(24, 10); printf("  Map");
-	gotoxy(24, 11); printf("  Food");
-	gotoxy(24, 12); printf("  Exit");
+	gotoxy(23, 6); printf("지렁이 게임");
+	gotoxy(24, 8); printf("  시작");
+	gotoxy(24, 9); printf("  지렁이");
+	gotoxy(24, 10); printf("  태두리");
+	gotoxy(24, 11); printf("  음식");
+	gotoxy(24, 12); printf("  종료");
 	gotoxy(16, 14);	printf("<발표순서 6월 3일(목) 6번째>");
-	gotoxy(16, 15);	printf("<오픈소스소프트웨어 이민우>");
+	gotoxy(16, 15);	printf("<오픈소스 소프트웨어 이민우>");
 	gotoxy(x - 1, y); printf(">");
 	while (true) {
 		int k = _getch();
