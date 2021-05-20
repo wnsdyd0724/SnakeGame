@@ -216,8 +216,8 @@ void Menu() {
 	gotoxy(24, 10); printf("  Map");
 	gotoxy(24, 11); printf("  Food");
 	gotoxy(24, 12); printf("  Exit");
-	gotoxy(14, 14);	printf("<발표순서 6월 3일(목) 6번째");
-	gotoxy(14, 15);	printf("<오픈소스소프트웨어 이민우>");
+	gotoxy(16, 14);	printf("<발표순서 6월 3일(목) 6번째>");
+	gotoxy(16, 15);	printf("<오픈소스소프트웨어 이민우>");
 	gotoxy(x - 1, y); printf(">");
 	while (true) {
 		int k = _getch();
