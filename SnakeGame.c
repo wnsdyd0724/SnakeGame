@@ -16,14 +16,15 @@
 #define DOWN 80
 #define ENTER 13
 #define SPACE 32
+#define ESC 27
 
 typedef enum { NOCURSOR, SOLIDCURSOR, NORMALCURSOR } CURSOR_TYPE;
 
 int key;
 int dir = LEFT;
-int length = 5;
-int x[100], y[100];
-int food_x = 10, food_y = 10;
+int length = 5;         //초기 길이
+int x[100], y[100];    // x,y 좌표값을 저장 총 100개
+int food_x = 10, food_y = 10; //food좌표
 int speed = 100;
 int score = 0;
 char snake[] = "■";
@@ -37,6 +38,7 @@ void Map();
 void Move(int dir);
 void Start();
 void GameOver();
+void reset(void); //게임을 초기화 
 void Status();
 void DropFood();
 void Menu();
@@ -172,10 +174,28 @@ void GameOver() {
 	{
 		if (_getch() == 'a' || _getch() == 'A')
 		{
+			reset(); // 게임을 초기화 
 			playSnakeGame();
 			break;
 		}
 	}
+}
+
+void reset(void) // 게임 데이터 초기화
+{
+	int i;
+	system("cls"); //화면을 지움 
+
+	dir = LEFT; // 방향 초기화  
+	speed = 100; // 속도 초기화 
+	length = 5; //뱀 길이 초기화 
+	score = 0; //점수 초기화 
+	for (i = 0;i < length;i++) { //뱀 몸통값 입력 
+		x[i] = WIDTH / 2 + i;
+		y[i] = HEIGHT / 2;
+		gotoxy(x[i], y[i], "□");
+	}
+	gotoxy(x[0], y[0], "■"); //뱀 머리 그림 
 }
 
 void DropFood() {
