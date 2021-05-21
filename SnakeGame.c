@@ -29,7 +29,7 @@ int speed = 100;
 int score = 0;
 char snake[] = "¡á";
 char wall[] = "¡à";
-char food[] = "¡Û";
+char food[] = "¡Ú";
 
 void gotoxy(int x, int y);
 void setcursortype(CURSOR_TYPE c);
@@ -372,7 +372,7 @@ void setFood() {
 	bool check = false;
 	gotoxy(40, 11); printf("¢½");
 	gotoxy(37, 11); printf("¡Ù");
-	gotoxy(34, 11); printf("¡Û");
+	gotoxy(34, 11); printf("¡Ú");
 	gotoxy(x, y - 1); printf("¡é");
 	while (true) {
 		int k = _getch();
