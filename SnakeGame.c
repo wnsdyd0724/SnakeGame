@@ -45,6 +45,19 @@ void Menu();
 void setMap(); void setSnake(); void setFood();
 char* change_word(char* string, char* old_word, char* new_word);
 
+void setColor(unsigned short text) 
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
+}
+
+enum
+{
+	BLUE,      /*  9 : ÆÄ¶û */
+	RED,      /* 12 : »¡°­ */
+	VOILET,      /* 13 : º¸¶ó */
+	YELLOW,      /* 14 : ³ë¶û */
+};
+
 int main() {
 	playSnakeGame();
 }
@@ -164,6 +177,7 @@ void Status() {
 }
 
 void GameOver() {
+	setColor(RED);
 	gotoxy(25, 9);
 	printf("Game Over");
 	gotoxy(25, 10);
