@@ -168,8 +168,8 @@ void GameOver() {
 	printf("Game Over");
 	gotoxy(25, 10);
 	printf("점수 : %d", score);//죽으면 점수출력
-	gotoxy(25, 11);
-	printf("Exit : 'A'");
+	gotoxy(12, 12);
+	printf("'A'키 입력 시 초기화면으로 돌아갑니다.");
 	while (1)// A누르면 게임재시작 break
 	{
 		if (_getch() == 'a' || _getch() == 'A')
@@ -392,7 +392,7 @@ void setFood() {
 		case ENTER:  case SPACE:
 			switch (x) {
 			case 34:
-				strcpy(food, change_word(food, food, "○"));
+				strcpy(food, change_word(food, food, "★"));
 				break;
 			case 37:
 				strcpy(food, change_word(food, food, "☆"));
