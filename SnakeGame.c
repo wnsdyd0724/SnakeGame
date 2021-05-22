@@ -5,14 +5,6 @@
 #include <stdbool.h>
 #include <time.h>
 
-int A[100] = { 0, }, B[100] = { 0, }, totalX = 0, totalY = 0, lon = 4, chack = 20, u = 0;   //전역변수
-
-typedef struct Ranker  //기록 저장
-{
-	int a;
-	char b[5];
-	struct Ranker* next;
-}Ranker;
 
 
 #define WIDTH 30
@@ -34,13 +26,11 @@ int length = 5;         //초기 길이
 int x[100], y[100];    // x,y 좌표값을 저장 총 100개
 int food_x = 10, food_y = 10; //food좌표
 int speed = 100;
-int score = 0;
+int score;
+int best_score = 0; //최고 점수 저장 --reset함수에 의해 초기화 되지 않음
 char snake[] = "■";
 char wall[] = "□";
 char food[] = "★";
-char name[10]; //이름 입력받는 변수
-char rankname[10][10];  //랭킹이름 저장 변수
-int rankscore[10]; //랭킹점수 저장 변수
 
 void gotoxy(int x, int y);
 void setcursortype(CURSOR_TYPE c);
@@ -50,13 +40,11 @@ void Move(int dir);
 void Start();
 void GameOver();
 void reset(void); //게임을 초기화 
-void textcolor(int color_number);  //출력문자 색변경
 void Status();
 void DropFood();
 void Menu();
 void setMap(); void setSnake(); void setFood();
 char* change_word(char* string, char* old_word, char* new_word);
-int showranking(); //랭킹보여주는 화면
 void textcolor(int color_number) 
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color_number);
@@ -173,19 +161,22 @@ void Move(int dir) {
 void Status() {
 	/*gotoxy(70, 1);
 	printf("좌표 : %d, %d", x[0], y[0]);*/
-	gotoxy(70, 2);
-	printf("길이 : %d", length);
-	gotoxy(70, 3);
-	printf("속도 : %d  ", speed);
 	gotoxy(70, 4);
+	printf("길이 : %d", length);
+	gotoxy(70, 5);
+	printf("속도 : %d  ", speed);
+	gotoxy(70, 6);
 	switch (dir) {
 	case UP: printf("방향 : UP   "); break;
 	case DOWN: printf("방향 : DOWN "); break;
 	case LEFT: printf("방향 : LEFT "); break;
 	case RIGHT: printf("방향 : RIGHT"); break;
 	}
-	gotoxy(70, 5);
+	gotoxy(70, 3);
 	printf("점수 : %d", score);
+	gotoxy(70, 2);
+	printf("최고점수 : %3d", best_score);
+
 	/*gotoxy(70, 7);
 	printf("먹이 : %d %d", food_x, food_y);*/
 }
@@ -193,9 +184,14 @@ void Status() {
 void GameOver() {
 	gotoxy(25, 9);
 	printf("Game Over");
-	gotoxy(25, 10);
+	gotoxy(25, 11);
 	printf("점수 : %d", score);//죽으면 점수출력
-	gotoxy(12, 12);
+	if (score > best_score) {
+		best_score = score;
+		gotoxy(20, 10);
+		printf("☆ 최고 점수 달성 ☆");
+	}
+	gotoxy(12, 13);
 	printf("'A'키 입력 시 초기화면으로 돌아갑니다.");
 	while (1)// A누르면 게임재시작 break
 	{
@@ -212,6 +208,7 @@ void reset(void) // 게임 데이터 초기화
 {
 	int i;
 	system("cls"); //화면을 지움 
+	Map(); //맵 테두리를 그림
 
 	dir = LEFT; // 방향 초기화  
 	speed = 100; // 속도 초기화 
