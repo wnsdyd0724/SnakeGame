@@ -5,6 +5,14 @@
 #include <stdbool.h>
 #include <time.h>
 
+int A[100] = { 0, }, B[100] = { 0, }, totalX = 0, totalY = 0, lon = 4, chack = 20, u = 0;   //전역변수
+
+typedef struct Ranker  //기록 저장
+{
+	int a;
+	char b[5];
+	struct Ranker* next;
+}Ranker;
 
 
 #define WIDTH 30
@@ -30,6 +38,9 @@ int score = 0;
 char snake[] = "■";
 char wall[] = "□";
 char food[] = "★";
+char name[10]; //이름 입력받는 변수
+char rankname[10][10];  //랭킹이름 저장 변수
+int rankscore[10]; //랭킹점수 저장 변수
 
 void gotoxy(int x, int y);
 void setcursortype(CURSOR_TYPE c);
@@ -39,11 +50,19 @@ void Move(int dir);
 void Start();
 void GameOver();
 void reset(void); //게임을 초기화 
+void textcolor(int color_number);  //출력문자 색변경
 void Status();
 void DropFood();
 void Menu();
 void setMap(); void setSnake(); void setFood();
 char* change_word(char* string, char* old_word, char* new_word);
+int showranking(); //랭킹보여주는 화면
+void textcolor(int color_number) 
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color_number);
+}
+
+
 
 enum
 {
