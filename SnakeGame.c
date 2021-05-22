@@ -200,14 +200,18 @@ void GameOver() {
 	printf("□□□□□□□□□□□□□□□□□□□□□□□□□□□□");
 	gotoxy(2, 9);
 	printf("□□□□□□□□□□□□□□□□□□□□□□□□□□□□");
-	gotoxy(25, 11);
+	gotoxy(2, 10);
+	printf("□□□□□□□□□□□□□□□□□□□□□□□□□□□□");
+	gotoxy(2, 11);
+	printf("□□□□□□□□□□□□□□□□□□□□□□□□□□□□");
+	gotoxy(25, 13);
 	printf("점수 : %d", score);//죽으면 점수출력
 	if (score > best_score) {
 		best_score = score;
-		gotoxy(20, 10);
+		gotoxy(20, 12);
 		printf("☆ 최고 점수 달성 ☆");
 	}
-	gotoxy(12, 13);
+	gotoxy(12, 14);
 	printf("'A'키 입력 시 초기화면으로 돌아갑니다.");
 	while (1)// A누르면 게임재시작 break
 	{
