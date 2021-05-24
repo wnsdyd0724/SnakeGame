@@ -40,6 +40,7 @@ void Move(int dir);
 void Start();
 void GameOver();
 void reset(void); //게임을 초기화 
+void info_draw(void); // 게임 방법 출력함수
 void Status();
 void DropFood();
 void Menu();
@@ -287,12 +288,13 @@ void Menu() {
 	int x = 25, y = 8;
 	gotoxy(23, 6); printf("지렁이 게임");
 	gotoxy(24, 8); printf("  시작");
-	gotoxy(24, 9); printf("  지렁이");
-	gotoxy(24, 10); printf("  태두리");
-	gotoxy(24, 11); printf("  음식");
-	gotoxy(24, 12); printf("  종료");
-	gotoxy(16, 14);	printf("<발표순서 6월 3일(목) 6번째>");
-	gotoxy(16, 15);	printf("<오픈소스 소프트웨어 이민우>");
+	gotoxy(24, 9); printf("  가이드");
+	gotoxy(24, 10); printf("  지렁이");
+	gotoxy(24, 11); printf("  태두리");
+	gotoxy(24, 12); printf("  음식");
+	gotoxy(24, 13); printf("  종료");
+	gotoxy(16, 15);	printf("<발표순서 6월 3일(목) 6번째>");
+	gotoxy(16, 16);	printf("<오픈소스 소프트웨어 이민우>");
 	gotoxy(x - 1, y); printf(">");
 	while (true) {
 		int k = _getch();
@@ -310,22 +312,50 @@ void Menu() {
 				gotoxy(x - 1, --y); printf(">");
 			} break;
 		case DOWN:
-			if (y < 12) {
+			if (y < 13) {
 				gotoxy(x - 1, y); printf("  ");
 				gotoxy(x - 1, ++y); printf(">");
 			} break;
 		case ENTER: case SPACE:
 			switch (y) {
 			case 8: return; break;
-			case 9: setSnake(); break;
-			case 10: setMap(); break;
-			case 11: setFood(); break;
-			case 12: exit(0);
+			case 9: info_draw(); break;
+			case 10: setSnake(); break;
+			case 11: setMap(); break;
+			case 12: setFood(); break;
+			case 13: exit(0);
 			}
 			check = true;
 		}
 		if (check == true)
 			break;
+	}
+}
+
+void info_draw(void) // 게임정보 
+{
+	system("cls");
+	gotoxy(1, 3);
+	printf("                              [규칙]\n\n");
+	printf("    * 지렁이는 현재 머리가 향하고 있는 방향으로 계속 이동합니다.\n");
+	printf("    * 플레이어의 조작으로 머리의 진행 방향을 바꿀 수 있습니다.\n");
+	printf("    * 지렁이는 벽이나 자신의 몸 일부에 닿으면 죽습니다.\n");
+	printf("    * 지렁이는 먹이를 먹을때마다 몸이 길어집니다. \n");
+	printf("    * 지렁이의 길이를 늘려 높은점수를 기록해보세요!\n\n\n\n");
+	printf("                            [조작 방법]\n\n");
+	printf("    * [↑] - 지렁이의 진행 방향을 위쪽으로 바꿀 수 있습니다. \n");
+	printf("    * [→] - 지렁이의 진행 방향을 오른쪽으로 바꿀 수 있습니다. \n");
+	printf("    * [←] - 지렁이의 진행 방향을 왼쪽으로 바꿀 수 있습니다. \n");
+	printf("    * [↓] - 지렁이의 진행 방향을 아래쪽으로 바꿀 수 있습니다. \n\n\n\n");
+	printf("    * E - 시작하기  \n");
+
+
+	while (1) // E을 입력받으면 메인화면으로 돌아갑니다.
+	{
+		if (_getch() == 'e' || _getch() == 'E')
+		{
+			break;
+		}
 	}
 }
 
